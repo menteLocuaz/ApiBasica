@@ -12,9 +12,12 @@ Route::get('/estudiante/{id}', function () {
 
 Route::post('/estudiante', [studentController::class, 'CrearStudiante']);
 
+Route::get('/estudiante/{id}', [studentController::class, 'DescricionEstudiante']);
+
 Route::put('/estudiante/{id}', function () {
-    return 'actulizar datos del estudiante ';
+    return 'Eliminar estudiante';
 });
+
 
 Route::delete('/estudiante/{id}', function () {
     return 'Eliminar estudiante';

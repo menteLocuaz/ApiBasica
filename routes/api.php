@@ -12,5 +12,6 @@ Route::get('/estudiante/{id}', [studentController::class, 'DescricionEstudiante'
 
 Route::put('/estudiante/{id}', [studentController::class, 'ActulizarEstudiante']);
 
+Route::patch('/estudiante/{id}', [studentController::class, 'ActulizacionParcial']);
 
 Route::delete('/estudiante/{id}', [studentController::class, 'EliminarEstudiante']);

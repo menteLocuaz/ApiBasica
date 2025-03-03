@@ -106,4 +106,50 @@ class studentController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+
+    // actulizar el estudiante 
+    public function ActulizarEstudiante(Request $request, $id)
+    {
+        $estudiante = modelstudent::find($id);
+        if (!$estudiante) {
+            $data = [
+                'message' => 'Estudiante no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $validar = validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|digits:10',
+            'Curso' => 'required'
+        ]);
+
+        if ($validar->fails()) {
+            $data = [
+                'message' => 'Error en la validacion de los datos',
+                'Error' => $validar->errors(),
+                'status' => 400
+            ];
+
+            return response()->json($data, 400);
+        }
+
+        $estudiante->name = $request->name;
+        $estudiante->email = $request->email;
+        $estudiante->phone = $request->phone;
+        $estudiante->Curso = $request->Curso;
+
+        $estudiante->save();
+
+        $data = [
+            'message' => 'Estudiante actulizado',
+            'student' => $estudiante,
+            'status',
+            200
+        ];
+
+        return response()->json($data, 200);
+    }
 }
